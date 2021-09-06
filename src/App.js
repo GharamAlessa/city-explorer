@@ -10,7 +10,9 @@ export class App extends Component {
     return (
       <div>
         <form onSubmit={this.handelSubmit}>
+
           <input type="text" onChange={this.handelLocationNameChange} placeholder="  enter city name" />
+
           <input type="submit" value="Explorer!" />
         </form>
 
