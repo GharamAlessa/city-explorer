@@ -19,7 +19,7 @@ export class App extends Component {
         <div>
           <h2>Location info</h2>
         </div>
-      </div>
+      </div>////
     )
   }
 }
