@@ -15,7 +15,7 @@ export class App extends Component {
         </form>
 
         <div>
-          <h2>Location Info</h2>
+          <h2>Location Info ggg</h2>
         </div>
       </div>
     )
