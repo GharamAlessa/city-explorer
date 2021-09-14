@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import axios from "axios";
+import Weather from "./weather.js"
 
 export class App extends Component {
   constructor(props) {
@@ -12,14 +13,15 @@ export class App extends Component {
       latitude: null,
       name: null,
       error: false,
+      
     };
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     let cityName = event.target.cityName.value;
     console.log(cityName);
-    axios
+    await axios
       .get(
         `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_KEY}&q=${cityName}&format=json`
       )
@@ -37,6 +39,14 @@ export class App extends Component {
           error: true,
         });
       });
+
+    await axios
+    .get(`${process.env.REACT_APP_SERVER}/weather?q=${cityName}`)
+    .then(result=>{
+      this.setState({
+        weatherData : result.data
+      })
+    })
   };
   render() {
     let urlImage = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_KEY}&center=${this.state.latitude},${this.state.longitude}`;
@@ -81,8 +91,13 @@ export class App extends Component {
             <p className="h2">latitude is:{this.state.latitude}</p>
           </Col>
         </Row>
-        <Row>
-          <Image src={urlImage} alt="img" />
+        <Row className='mt-4'>
+          <Col md={6} >
+          <Image width="400px" src={urlImage} alt="img" />
+          </Col>
+          <Col md={6}>
+          {this.state.weatherData && <Weather x={this.state.weatherData}/>}
+          </Col>
         </Row>
       </Container>
     );
