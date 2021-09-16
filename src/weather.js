@@ -4,7 +4,7 @@ export class weather extends Component {
     render() {
         return (
             <>
-            {this.props.x.map(item=>{
+            {this.props.x.map((item)=>{
                 return(
                     <>
                     <h3>The date is : {item.date}</h3>
