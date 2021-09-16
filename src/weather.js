@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
+import WeatherDay, { weatherDay } from './weatherDay'
 
 export class weather extends Component {
     render() {
         return (
-            <>
-            {this.props.x.map(item=>{
+            
+        this.props.x.map((item)=>{
                 return(
-                    <>
-                    <h3>The date is : {item.date}</h3>
-                    <p>Weather Status : {item.description}</p>
-                    </>
+                    
+                    <WeatherDay date={item.date}
+                    description={item.description}/>
+                   
                 )
         
-            })}
-            </>
+            })
+            
         )
     }
 }
